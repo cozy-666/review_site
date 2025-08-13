@@ -1,0 +1,55 @@
+services:
+    
+  web: 
+    container_name: myapp-php
+    build: ./docker-config/php
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./my-app:/var/www/
+    depends_on:
+      - mariadb
+
+  nginx:
+    container_name: myapp-nginx
+    image: nginx
+    build: ./docker-config/nginx
+    ports:
+      - "81:80"
+    volumes:
+      - ./my-app:/var/www
+      - ./docker-config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+
+  mariadb:
+    container_name: myapp-mariadb
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
+      
+    volumes:
+      - ./docker-config/mariadb/data:/var/lib/mysql
+      - ./docker-config/mariadb/data/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker-config/mariadb/data/sql:/docker-entrypoint-initdb.d
+
+  # phpmyadmin:
+  #   container_name: myapp-phpmyadmin
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #     - PMA_ARBITRARY=1
+  #     - PMA_HOST=mysql
+  #     - PMA_USER=${MYSQL_USER}
+  #     - PMA_PASSWORD=${MYSQL_PASSWORD}
+  #   links:
+  #     - mariadb
+  #   ports:
+  #     - 8081:80
+  #   volumes:
+  #     - /sessions
