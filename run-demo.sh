@@ -8,7 +8,7 @@ export PIP_CACHE_DIR="$PWD/.demo/pip-cache"
 export COMPOSER_HOME="$PWD/.demo/composer" COMPOSER_CACHE_DIR="$PWD/.demo/composer-cache"
 cd my-app
 [[ -f .env.demo ]] || cp .env.example .env.demo
-export APP_NAME="業務管理デモ" LOG_CHANNEL=single LOG_LEVEL=debug MAIL_FROM_ADDRESS=demo@example.invalid MAIL_FROM_NAME="しっぽ商店（架空）"
+export APP_NAME="業務管理デモ" LOG_CHANNEL=single LOG_LEVEL=debug MAIL_FROM_ADDRESS=demo@example.invalid MAIL_FROM_NAME="しっぽ商店"
 export APP_ENV=local APP_DEBUG=true APP_URL=http://localhost:8102
 export DB_CONNECTION=sqlite DB_DATABASE="$PWD/database/demo.sqlite"
 export SESSION_COOKIE=review_demo_session
