@@ -63,7 +63,7 @@ class ReviewController extends Controller
 
     public function edit($id)
     {
-        $review = Review::with('shop')->find($id);
+        $review = Review::with('shop')->findOrFail($id);
 
         $user=Auth::user();
         if($user->id !== $review->user_id)
@@ -88,6 +88,8 @@ class ReviewController extends Controller
             'comment'=> 'required|string|max:255',
         ]);
 
+        $existing = Review::findOrFail($request->review_id);
+        abort_unless((int) Auth::id() === (int) $existing->user_id, 403);
         $reviewModel = new Review();
         $review = $reviewModel->updateReview($request);
 
@@ -103,7 +105,8 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         $status = "error";
-        $review = Review::find($id);
+        $review = Review::findOrFail($id);
+        abort_unless((int) Auth::id() === (int) $review->user_id, 403);
         if($review){
             $review->delete();
             $status= 'review-deleted';

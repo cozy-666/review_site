@@ -31,7 +31,7 @@ const IndexByUser = (props) => {
                                             <Image
                                                 boxSize="100px"
                                                 objectFit="cover"
-                                                src="https://placehold.jp/100x100.png"
+                                                src="/demo-placeholder.svg"
                                                 alt={shop.name}
                                             />
                                             <VStack align={"start"}>

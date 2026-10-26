@@ -93,7 +93,7 @@ class ShopController extends Controller
 
         $user = Auth::user();
         if (!$user) {
-            return redirect()->route('loging');
+            return redirect()->route('login');
         }
         $status = "error";
 

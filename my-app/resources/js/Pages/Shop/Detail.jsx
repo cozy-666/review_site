@@ -136,7 +136,7 @@ const Detail = (props) => {
                 <Image
                     boxSize="300px"
                     objectFit="contain"
-                    src="https://placehold.jp/100x100.png"
+                    src="/demo-placeholder.svg"
                     alt={props.shop.name}
                     mb={4}
                 />

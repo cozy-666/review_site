@@ -1,0 +1,11 @@
+
+# Screenshot runtime files
+my-app/.env.screenshot
+my-app/database/screenshot.sqlite
+
+# Local screenshot demo artifacts
+.venv-demo/
+.env.demo
+.env.demo.*
+.demo/
+**/demo.sqlite*
